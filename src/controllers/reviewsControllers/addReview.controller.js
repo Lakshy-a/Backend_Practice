@@ -4,6 +4,7 @@ import {
 } from "../../utils/apiResponse.utils.js";
 import jwt from "jsonwebtoken";
 import { Review } from "../../models/reviews.model.js";
+import { Product } from "../../models/product.model.js";
 
 const addReview = async (req, res) => {
   const { rating, review, productId } = req.body;
@@ -21,6 +22,13 @@ const addReview = async (req, res) => {
       productId,
       userId,
     });
+
+    // Step 2: Push the new review's ID into the product's reviews array
+    await Product.findByIdAndUpdate(
+      productId,
+      { $push: { reviews: savedReview._id } },
+      { new: true } // Return the updated product
+    );
 
     return successResponse(res, "Review added successfully...", savedReview);
   } catch (error) {
