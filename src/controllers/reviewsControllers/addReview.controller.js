@@ -23,14 +23,23 @@ const addReview = async (req, res) => {
       userId,
     });
 
+    const findProduct = await Product.findById(productId).populate("reviews");
+    if (!findProduct) return errorResponse(res, 404, "Product not found");
+
+    const totalReviews = findProduct.reviews.length + 1;
+    const totalRating =
+      findProduct.reviews.reduce((sum, review) => sum + review.rating, 0) +
+      rating;
+    const averageRating = totalRating / totalReviews;
+
     // Step 2: Push the new review's ID into the product's reviews array
     await Product.findByIdAndUpdate(
       productId,
-      { $push: { reviews: savedReview._id } },
+      { $push: { reviews: savedReview._id }, averageRating: averageRating },
       { new: true } // Return the updated product
     );
 
-    return successResponse(res, "Review added successfully...", savedReview);
+    return successResponse(res, "Review added successfully...");
   } catch (error) {
     console.log(error);
     return errorResponse(res, 500, "Some internal error occurred");
