@@ -13,7 +13,7 @@ import bcrypt from "bcryptjs";
 const loginController = async (req, res) => {
   // 1. Collect data from req.body
   // 2. Check if all the fields are coming or not
-  // 3. Find the user exists with enetered email or username
+  // 3. Find the user exists with entered email or username
   // 4. Verify if password is same or not
   // 5. If yes, generate the access token and refresh token
   // 6. Send the access token in cookies
@@ -41,7 +41,7 @@ const loginController = async (req, res) => {
     const accessTokenData = {
       _id: existingUser._id,
       email: existingUser.email,
-      fullName: existingUser.fullName,
+      name: existingUser.fullName,
     };
     const accessToken = generateAccessToken(accessTokenData);
 

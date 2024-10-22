@@ -4,11 +4,12 @@ import { User } from "../../models/user.model.js";
 import { uploadOnCloudinary } from "../../utils/cloudinary.service.js";
 
 const registerController = async (req, res) => {
-  const { userName, email, password, fullName } = req.body;
+  const { name, email, password, phone } = req.body;
+  console.log(req.body)
 
   try {
     // All fields are required
-    if (!userName || !email || !password) {
+    if (!name || !email || !password || !phone) {
       return errorHandler(res, 400, "All fields are required...");
     }
 
@@ -29,37 +30,19 @@ const registerController = async (req, res) => {
     }
 
     // check if user with the same userName or same email exists
-    const existingUser = await User.findOne({ $or: [{ email }, { userName }] });
+    const existingUser = await User.findOne({ $or: [{ email }, { name }] });
 
     // if user already exists throw error
     if (existingUser) {
       return errorHandler(res, 400, "User already exists");
     }
 
-    // Access the uploaded avatar
-    const avatarLocalPath = req.file?.path;
-    // console.log("Details of the uploaded file: ", req.file);
-
-    // avatar is required
-    if (!avatarLocalPath) {
-      return errorHandler(res, 400, "Avatar is required");
-    }
-
-    // response we'll get after uploading our local path to the cloudinary
-    const avatarResponse = await uploadOnCloudinary(avatarLocalPath);
-
-    // if there is no response it means that there is some error in uploading the local path to cloudinary
-    if (!avatarResponse) {
-      return errorHandler(res, 400, "Error uploading avatar to Cloudinary...");
-    }
-
     // Save user to the database
     const user = await User.create({
-      userName,
+      name,
       email,
-      password, // password has already been hashed in the userSchema
-      fullName,
-      avatar: avatarResponse.secure_url, // Use the URL returned from Cloudinary
+      password, // password has already been hashed in the 
+      phone,
     });
 
     // Exclude sensitive fields from the response

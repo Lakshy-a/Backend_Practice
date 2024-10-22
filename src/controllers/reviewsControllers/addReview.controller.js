@@ -5,6 +5,7 @@ import {
 import jwt from "jsonwebtoken";
 import { Review } from "../../models/reviews.model.js";
 import { Product } from "../../models/product.model.js";
+import { User } from "../../models/user.model.js";
 
 const addReview = async (req, res) => {
   const { rating, review, productId } = req.body;
@@ -37,6 +38,13 @@ const addReview = async (req, res) => {
       productId,
       { $push: { reviews: savedReview._id }, averageRating: averageRating },
       { new: true } // Return the updated product
+    );
+
+    // push the review id into the reviewsPosted array os user
+    await User.findByIdAndUpdate(
+      userId,
+      { $push: { reviewsPosted: savedReview._id } },
+      { new: true }
     );
 
     return successResponse(res, "Review added successfully...");

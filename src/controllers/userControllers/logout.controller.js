@@ -2,12 +2,12 @@ import { User } from "../../models/user.model.js";
 import jwt from "jsonwebtoken";
 import errorHandler from "../../utils/errorHandler.js";
 
-const logoutControler = async (req, res) => {
+const logoutController = async (req, res) => {
   // 1. fetch the access token from the cookies
   // 2. verify the access token using access token secret
   // 3. get the _id from there
-  // 4. search if the refresh token is not empty of the user with this _id
-  // 5. if it is not empty, delete the refresh token from the user also clear the cookies
+  // 4. search if the refresh token is not empty of the user    with this _id
+  // 5. if it is not empty, delete the refresh token from the   user also clear the cookies
   // 6. return a response with a success message
 
   try {
@@ -40,4 +40,4 @@ const logoutControler = async (req, res) => {
   }
 };
 
-export default logoutControler;
+export default logoutController;

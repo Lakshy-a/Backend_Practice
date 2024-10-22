@@ -1,51 +1,50 @@
 import mongoose, { Schema } from "mongoose";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 const userSchema = new Schema(
   {
-    userName: {
+    name: {
       type: String,
       required: true,
-      unique: true,
-      trim: true,
-      index: true,
-      lowercase: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
-      lowercase: true,
     },
-    fullName: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-      index: true,
-    },
-    avatar: {
-      type: String, // cloudinary image
-      required: true,
-    },
-    // coverImage: {
-    //   type: String, // cloudinary image
-    // },
-    watchHistory: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Video",
-      },
-    ],
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: true,
     },
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    billingAddress: {
+      type: String,
+      default: "",
+    },
+    shippingAddress: {
+      type: String,
+      default: "",
+    },
+    orderHistory: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
     refreshToken: {
       type: String,
+      default: "",
     },
+    reviewsPosted: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );
