@@ -16,7 +16,7 @@ const deleteProduct = async (req, res) => {
     if (!_id) return errorResponse(res, "Product id is required", 400);
 
     // find the product with this id
-    const existingProduct = await Product.findById(_id);
+    const existingProduct = await Product.findById({_id});
 
     //check if the product exists
     if(!existingProduct)

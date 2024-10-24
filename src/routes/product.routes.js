@@ -8,15 +8,18 @@ import deleteProduct from "../controllers/productControllers/deleteProduct.contr
 
 const router = express.Router();
 import upload from "../middlewares/upload.middleware.js";
+import restoreProduct from "../controllers/productControllers/restoreProduct.controller.js";
 
-router.get("/allProduct", isLoggedIn, getAllProducts);
-router.get("/productsById/:_id", isLoggedIn, getProductsById);
-router.get(
-  "/productsByCategory/:category",
+router.get("/allProduct", getAllProducts);
+router.get("/productsById/:_id", getProductsById);
+router.get("/productsByCategory/:category", getProductsByCategory);
+router.post(
+  "/addProduct",
+  upload.array("productImages"),
   isLoggedIn,
-  getProductsByCategory
+  postNewProduct
 );
-router.post("/addProduct", upload.array("productImages"), isLoggedIn, postNewProduct);
 router.delete("/deleteProduct/:_id", isLoggedIn, deleteProduct);
+router.post("/restoreProduct/:_id", isLoggedIn, restoreProduct);
 
 export default router;

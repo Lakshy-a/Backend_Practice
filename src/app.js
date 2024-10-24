@@ -5,11 +5,16 @@ import productRoutes from "./routes/product.routes.js";
 import cookieParser from "cookie-parser";
 import reviewsRoutes from "./routes/reviews.routes.js";
 import ordersRoutes from "./routes/orders.routes.js";
-import adminRoutes from "./routes/adminAuth.routes.js"
+import adminRoutes from "./routes/adminAuth.routes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend URL
+    credentials: true, // Allow credentials (cookies)
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
