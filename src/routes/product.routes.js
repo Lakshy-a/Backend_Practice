@@ -11,8 +11,12 @@ import upload from "../middlewares/upload.middleware.js";
 
 router.get("/allProduct", isLoggedIn, getAllProducts);
 router.get("/productsById/:_id", isLoggedIn, getProductsById);
-router.get("/productsByCategory/:category", isLoggedIn, getProductsByCategory);
-router.post("/addProduct", isLoggedIn, upload.array("images"), postNewProduct);
+router.get(
+  "/productsByCategory/:category",
+  isLoggedIn,
+  getProductsByCategory
+);
+router.post("/addProduct", upload.array("productImages"), isLoggedIn, postNewProduct);
 router.delete("/deleteProduct/:_id", isLoggedIn, deleteProduct);
 
 export default router;

@@ -1,16 +1,6 @@
 import { errorResponse } from "../utils/apiResponse.utils.js";
 import jwt from "jsonwebtoken";
 
-// Middleware to check if the user is logged in
-// 1. Get the accessToken from cookies
-// 2. if token is not there then user is not logged in
-// 3. if it is there, check if the access token is valid
-// 4. if valid, send the payload to next middleware with request
-// 5. if it is not valid it can be in any of three caese:
-//    a. token is expired
-//    b. token is invalid
-//    c. token is blacklisted
-
 const isLoggedIn = (req, res, next) => {
   const token = req.cookies.accessToken;
 

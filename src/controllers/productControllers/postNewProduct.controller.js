@@ -9,7 +9,7 @@ import { uploadOnCloudinary } from "../../utils/cloudinary.service.js";
 // 2. check if eny field is empty or not
 // 3. check if the product with same name already exist
 // 4. if no product exist then create new one and save it to the db
-// 5, after sucessfully adding product send the success response
+// 5, after successfully adding product send the success response
 
 const postNewProduct = async (req, res) => {
   // desctructure body
@@ -23,11 +23,10 @@ const postNewProduct = async (req, res) => {
     stockQuantity,
     availableSizes,
     availableColors,
-    isActive,
     isFeatured,
     isNewCollection,
   } = req.body;
-
+  
   try {
     // check if any field is empty
     const isEmpty = [
