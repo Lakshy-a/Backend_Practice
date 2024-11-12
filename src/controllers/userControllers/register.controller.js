@@ -5,17 +5,17 @@ import { uploadOnCloudinary } from "../../utils/cloudinary.service.js";
 
 const registerController = async (req, res) => {
   const { name, email, password, phone } = req.body;
-  console.log(req.body)
+  // console.log(req.body);
 
   try {
     // All fields are required
     if (!name || !email || !password || !phone) {
-      return errorHandler(res, 400, "All fields are required...");
+      return errorHandler(res, 400, "All fields are required.");
     }
 
     // Email format validation
     if (!email.includes("@") || !email.includes(".com")) {
-      return errorHandler(res, 400, "Please check the format of email");
+      return errorHandler(res, 400, "Please check the format of the email.");
     }
 
     // Password format validation
@@ -29,40 +29,52 @@ const registerController = async (req, res) => {
       );
     }
 
-    // check if user with the same userName or same email exists
+    // Check if user with the same name or email exists
     const existingUser = await User.findOne({ $or: [{ email }, { name }] });
-
-    // if user already exists throw error
     if (existingUser) {
-      return errorHandler(res, 400, "User already exists");
+      return errorHandler(
+        res,
+        400,
+        "User with this email or username already exists."
+      );
     }
 
-    // Save user to the database
+    // Hash the password before saving
+    // const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Save the user to the database
     const user = await User.create({
       name,
       email,
-      password, // password has already been hashed in the 
+      password,
       phone,
     });
 
     // Exclude sensitive fields from the response
-    // in the response password and refresh token will not be sent
     const createdUser = await User.findById(user._id).select(
       "-password -refreshToken"
     );
 
-    // no user found
     if (!createdUser) {
-      return errorHandler(res, 400, "User not found");
+      return errorHandler(res, 400, "User not found.");
     }
 
-    // everything is running fine
-    res
-      .status(200)
-      .json({ message: "User registered successfully", user: createdUser });
+    // Return success response
+    res.status(200).json({
+      message: "User registered successfully",
+      user: createdUser,
+    });
   } catch (error) {
     console.error(error);
-    errorHandler(res, 400, "Error registering user...");
+
+    // Handle duplicate key error
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      return errorHandler(res, 400, `Duplicate ${field} detected.`);
+    }
+
+    // Handle other errors
+    errorHandler(res, 500, "Error registering user.");
   }
 };
 

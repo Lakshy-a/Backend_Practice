@@ -5,12 +5,14 @@ import registerController from "../controllers/userControllers/register.controll
 import logoutController from "../controllers/userControllers/logout.controller.js";
 import upload from "../middlewares/upload.middleware.js";
 import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
+import userProfile from "../controllers/userControllers/userProfile.controller.js";
 
 const router = express.Router();
 
 router.post("/register", upload.single("avatar"), registerController);
 router.post("/login", loginController);
 router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
-router.post("/logout", isLoggedIn, logoutController);
+router.post("/logout", logoutController);
+router.get("/userProfile", userProfile);
 
 export default router;

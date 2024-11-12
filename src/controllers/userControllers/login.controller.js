@@ -36,6 +36,7 @@ const loginController = async (req, res) => {
       existingUser.password
     );
     if (!isValidPassword) return handleError(res, 400, "Incorrect password...");
+    // console.log(isValidPassword)
 
     // generate the access token
     const accessTokenData = {
@@ -53,17 +54,16 @@ const loginController = async (req, res) => {
     existingUser.refreshToken = refreshToken;
     await existingUser.save({ validateBeforeSave: false });
 
-    // console.log(
-    //   `Access Token: ${accessToken}, \nRefresh Token: ${refreshToken}`
-    // );
-
     const options = {
-      httpOnly: true, // prevents client-side JavaScript from accessing the cookie.
+      httpOnly: false, // prevents client-side JavaScript from accessing the cookie.
       secure: true, // ensures that the cookie is only sent over HTTPS connections.
+      sameSite: "none",
+      secure: true,
     };
 
     // set access token as cookies
     res.cookie("accessToken", accessToken, options);
+    // console.log(req.cookies.accessToken)
 
     // send the success message
     successResponse(res, "User logged in successfully");
