@@ -18,11 +18,11 @@ const userProfile = async (req, res) => {
     }
 
     // Step 3: Check if the user exists in the database
-    const isExist = await User.findById(userData._id);
+    const isExist = await User.findById(userData._id).select("-createdAt -password -refreshToken -updatedAt -_id");
     if (!isExist) return errorResponse(res, 404, "User not found");
 
     // Step 4: Send success response with user data
-    return successResponse(res, "User profile fetched successfully", isExist.name);
+    return successResponse(res, "User profile fetched successfully", isExist);
   } catch (error) {
     console.error("Error in userProfile function:", error);
     return errorResponse(res, 500, "An error occurred while fetching the user profile");
