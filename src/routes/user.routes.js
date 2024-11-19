@@ -6,6 +6,8 @@ import logoutController from "../controllers/userControllers/logout.controller.j
 import upload from "../middlewares/upload.middleware.js";
 import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
 import userProfile from "../controllers/userControllers/userProfile.controller.js";
+import { updateUserProfile } from "../controllers/userControllers/updateUserProfile.controller.js";
+import { deleteUserProfile } from "../controllers/userControllers/deleteUserProfile.controller.js";
 
 const router = express.Router();
 
@@ -13,6 +15,10 @@ router.post("/register", upload.single("avatar"), registerController);
 router.post("/login", loginController);
 router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
 router.post("/logout", logoutController);
-router.get("/userProfile", userProfile);
+
+// user profile
+router.get("/userProfile", userProfile); // get user profile
+router.put("/userProfile", updateUserProfile); // update user profile
+router.delete("/userProfile", deleteUserProfile); // delete user profile
 
 export default router;

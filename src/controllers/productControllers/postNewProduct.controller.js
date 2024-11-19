@@ -26,7 +26,7 @@ const postNewProduct = async (req, res) => {
     isFeatured,
     isNewCollection,
   } = req.body;
-  
+
   try {
     // check if any field is empty
     const isEmpty = [
