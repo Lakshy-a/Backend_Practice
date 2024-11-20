@@ -16,7 +16,6 @@ router.get("/productsByCategory/:category", getProductsByCategory);
 router.post(
   "/addProduct",
   upload.array("productImages"),
-  isLoggedIn,
   postNewProduct
 );
 router.delete("/deleteProduct/:_id", isLoggedIn, deleteProduct);
