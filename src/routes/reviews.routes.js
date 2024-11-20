@@ -11,7 +11,7 @@ import filterReviews from "../controllers/reviewsControllers/filterReviews.contr
 
 const router = express.Router();
 
-router.get("/getReviewsByProduct/:reviewId", isLoggedIn, getReviewsByProduct);
+router.get("/getReviewsByProduct/:productId",  getReviewsByProduct);
 router.get("/getReviewById/:reviewId", isLoggedIn, getReviewById);
 router.get("/getUserReview/:userId", isLoggedIn, getReviewsByUser); 
 router.get("/getAlReviews", isLoggedIn, getAllReviews);

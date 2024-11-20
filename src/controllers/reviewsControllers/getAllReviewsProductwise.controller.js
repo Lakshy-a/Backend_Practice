@@ -6,13 +6,14 @@ import {
 } from "../../utils/apiResponse.utils.js";
 
 const getReviewsByProduct = async (req, res) => {
-  const { reviewId } = req.params;
+  const { productId } = req.params;
 
   try {
-    if (!reviewId) return errorResponse(res, 400, "Product ID is required");
+    if (!productId) return errorResponse(res, 400, "Product ID is required");
 
     // Find product and populate reviews
-    const product = await Product.findById(reviewId).populate("reviews");
+    const product = await Review.findOne({productId}).populate("productId").populate("userId");
+    console.log(product)
 
     if (!product) return errorResponse(res, 404, "Product not found");
 
