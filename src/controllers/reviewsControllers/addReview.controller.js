@@ -10,8 +10,11 @@ import { User } from "../../models/user.model.js";
 const addReview = async (req, res) => {
   const { rating, review, productId } = req.body;
   try {
-    const isEmpty = [rating, review, productId].some((item) => !item);
-    if (isEmpty) return errorResponse(res, 400, "Please fill all fields");
+    if(!rating || !review || !productId){
+      return errorResponse(res, 400, "Please fill all the fields");
+    }
+    // const isEmpty = [rating, review, productId].some((item) => !item);
+    // if (isEmpty) return errorResponse(res, 400, "Please fill all fields");
 
     const token = req.cookies.accessToken;
     const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
