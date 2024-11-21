@@ -44,6 +44,10 @@ const userSchema = new Schema(
         ref: "Review",
       },
     ],
+    isActive: {
+      type: Boolean, 
+      default: true
+    }
   },
   { timestamps: true }
 );
