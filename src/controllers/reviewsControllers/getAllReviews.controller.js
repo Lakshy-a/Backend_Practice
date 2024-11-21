@@ -6,7 +6,7 @@ import { Review } from "../../models/reviews.model.js";
 
 const getAllReviews = async (req, res) => {
   try {
-    const reviews = await Review.find();
+    const reviews = await Review.find().populate("userId").populate("productId");
 
     successResponse(res, "Fetched all reviews successfully", reviews);
   } catch (error) {

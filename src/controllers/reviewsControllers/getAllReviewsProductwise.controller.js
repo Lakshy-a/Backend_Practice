@@ -12,8 +12,10 @@ const getReviewsByProduct = async (req, res) => {
     if (!productId) return errorResponse(res, 400, "Product ID is required");
 
     // Find product and populate reviews
-    const product = await Review.findOne({productId}).populate("productId").populate("userId");
-    console.log(product)
+    const product = await Review.find({ productId })
+      .populate("productId")
+      .populate("userId");
+    console.log(product);
 
     if (!product) return errorResponse(res, 404, "Product not found");
 
