@@ -13,11 +13,11 @@ const router = express.Router();
 
 router.post("/register", upload.single("avatar"), registerController);
 router.post("/login", loginController);
-router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
-router.post("/logout", logoutController);
+router.post("/forgotPassword", forgotPasswordController);
+router.post("/logout", isLoggedIn, logoutController);
 
 // user profile
-router.get("/userProfile", userProfile); // get user profile
+router.get("/userProfile", isLoggedIn, userProfile); // get user profile
 router.put("/userProfile", updateUserProfile); // update user profile
 router.delete("/userProfile", deleteUserProfile); // delete user profile
 

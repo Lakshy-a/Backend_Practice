@@ -54,19 +54,8 @@ const loginController = async (req, res) => {
     existingUser.refreshToken = refreshToken;
     await existingUser.save({ validateBeforeSave: false });
 
-    const options = {
-      httpOnly: false, // prevents client-side JavaScript from accessing the cookie.
-      secure: true, // ensures that the cookie is only sent over HTTPS connections.
-      sameSite: "none",
-      secure: true,
-    };
-
-    // set access token as cookies
-    res.cookie("accessToken", accessToken, options);
-    // console.log(req.cookies.accessToken)
-
     // send the success message
-    successResponse(res, "User logged in successfully");
+    successResponse(res, "User logged in successfully", accessToken);
   } catch (error) {
     console.log(error);
     errorResponse(res, 400, "Error logging in user!", error);
