@@ -41,13 +41,11 @@ const productSchema = mongoose.Schema(
       default: [],
     },
     availableSizes: {
-      type: Array,
-      default: [],
-
+      type: [String],
       required: true,
     },
     availableColors: {
-      type: Array,
+      type: String,
       required: true,
     },
     isActive: {

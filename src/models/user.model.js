@@ -45,9 +45,14 @@ const userSchema = new Schema(
       },
     ],
     isActive: {
-      type: Boolean, 
-      default: true
-    }
+      type: Boolean,
+      default: true,
+    },
+    cartId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cart",
+      default: null, // You can set a default value as null if no cart exists initially
+    },
   },
   { timestamps: true }
 );
