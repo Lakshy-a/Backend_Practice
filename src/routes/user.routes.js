@@ -17,8 +17,8 @@ router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
 router.post("/logout", logoutController);
 
 // user profile
-router.get("/userProfile", userProfile); // get user profile
-router.put("/userProfile", updateUserProfile); // update user profile
+router.get("/userProfile", isLoggedIn, userProfile); // get user profile
+router.put("/userProfile", isLoggedIn, updateUserProfile); // update user profile
 router.delete("/userProfile", deleteUserProfile); // delete user profile
 
 export default router;

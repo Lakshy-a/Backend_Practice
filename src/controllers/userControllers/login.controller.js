@@ -66,7 +66,7 @@ const loginController = async (req, res) => {
     // console.log(req.cookies.accessToken)
 
     // send the success message
-    successResponse(res, "User logged in successfully");
+    successResponse(res, "User logged in successfully", accessToken);
   } catch (error) {
     console.log(error);
     errorResponse(res, 400, "Error logging in user!", error);
