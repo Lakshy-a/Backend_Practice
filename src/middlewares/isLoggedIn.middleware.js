@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 
 const isLoggedIn = (req, res, next) => {
   // Access the token from cookies
-  const token = req.cookies.accessToken;
-
-  // console.log("Token from cookie:", token); // For debugging
+  // const token = req.cookies.accessToken;
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
 
   // Check if the token is present
   if (!token) {
