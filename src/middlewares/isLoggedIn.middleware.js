@@ -1,7 +1,8 @@
+import { User } from "../models/user.model.js";
 import { errorResponse } from "../utils/apiResponse.utils.js";
 import jwt from "jsonwebtoken";
 
-const isLoggedIn = (req, res, next) => {
+const isLoggedIn = async (req, res, next) => {
   // Access the token from cookies
   // const token = req.cookies.accessToken;
   const authHeader = req.headers['authorization'];
@@ -15,6 +16,11 @@ const isLoggedIn = (req, res, next) => {
   try {
     // Verify the token
     const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const isUserLoggedOut = await User.findOne({ email: payload.email });
+    if (!isUserLoggedOut.refreshToken) {
+      return errorResponse(res, 403, "Forbidden");
+    }
 
     // Attach the decoded payload (user data) to the request object
     req.user = payload;

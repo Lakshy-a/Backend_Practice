@@ -30,7 +30,7 @@ const registerController = async (req, res) => {
     }
 
     // Check if user with the same name or email exists
-    const existingUser = await User.findOne({ $or: [{ email }, { name }] });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return errorHandler(
         res,
