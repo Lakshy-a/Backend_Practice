@@ -8,6 +8,7 @@ import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
 import userProfile from "../controllers/userControllers/userProfile.controller.js";
 import { updateUserProfile } from "../controllers/userControllers/updateUserProfile.controller.js";
 import { deleteUserProfile } from "../controllers/userControllers/deleteUserProfile.controller.js";
+import { resetPassword } from "../controllers/userControllers/resetPassword.controller.js";
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.post("/register", upload.single("avatar"), registerController);
 router.post("/login", loginController);
 router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
 router.post("/logout", isLoggedIn, logoutController);
+router.post("/resetPassword", resetPassword);
 
 // user profile
 router.get("/userProfile", isLoggedIn, userProfile); // get user profile
