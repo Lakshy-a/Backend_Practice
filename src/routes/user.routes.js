@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/register", upload.single("avatar"), registerController);
 router.post("/login", loginController);
 router.post("/forgotPassword", isLoggedIn, forgotPasswordController);
-router.post("/logout", logoutController);
+router.post("/logout", isLoggedIn, logoutController);
 
 // user profile
 router.get("/userProfile", isLoggedIn, userProfile); // get user profile
