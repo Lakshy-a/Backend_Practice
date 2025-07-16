@@ -19,6 +19,6 @@ router.post("/logout", isLoggedIn, logoutController);
 // user profile
 router.get("/userProfile", isLoggedIn, userProfile); // get user profile
 router.put("/userProfile", isLoggedIn, updateUserProfile); // update user profile
-router.delete("/userProfile", deleteUserProfile); // delete user profile
+router.delete("/userProfile", isLoggedIn, deleteUserProfile); // delete user profile
 
 export default router;
