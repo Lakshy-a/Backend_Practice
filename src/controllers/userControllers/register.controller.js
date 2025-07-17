@@ -25,7 +25,7 @@ const registerController = async (req, res) => {
       return errorHandler(
         res,
         400,
-        "Password must be at least 8 characters long, contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+        "Password must be at least 8 characters long, contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.",
       );
     }
 
@@ -35,7 +35,7 @@ const registerController = async (req, res) => {
       return errorHandler(
         res,
         400,
-        "User with this email or username already exists."
+        "User with this email or username already exists.",
       );
     }
 
@@ -52,7 +52,7 @@ const registerController = async (req, res) => {
 
     // Exclude sensitive fields from the response
     const createdUser = await User.findById(user._id).select(
-      "-password -refreshToken"
+      "-password -refreshToken",
     );
 
     if (!createdUser) {

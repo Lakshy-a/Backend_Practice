@@ -4,11 +4,8 @@ import {
 } from "../../utils/apiResponse.utils.js";
 import { User } from "../../models/user.model.js";
 
-
 export const updateUserProfile = async (req, res) => {
-  const {
-    name, email, phone, billingAddress, shippingAddress
-  } = req.body;
+  const { name, email, phone, billingAddress, shippingAddress } = req.body;
   try {
     const user = await User.findOne({ email });
     if (!user)
@@ -28,7 +25,7 @@ export const updateUserProfile = async (req, res) => {
       email: user.email,
       phone: user.phone,
       billingAddress: user.billingAddress,
-      shippingAddress: user.shippingAddress
+      shippingAddress: user.shippingAddress,
     });
   } catch (error) {
     return errorResponse(res, 500, "Error in updating the user profile");

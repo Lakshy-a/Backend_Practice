@@ -11,7 +11,7 @@ const getProductsById = async (req, res) => {
     if (!id) return errorResponse(res, "Product id is required", 400);
 
     // find product with give id, if not found then respond with error
-    const product = await Product.findById(id).populate("reviews")
+    const product = await Product.findById(id).populate("reviews");
     if (!product) return errorResponse(res, "Product not found", 404);
 
     // success response

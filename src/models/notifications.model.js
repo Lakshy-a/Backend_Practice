@@ -21,10 +21,10 @@ const notificationsSchema = mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const Notifications = mongoose.model(
   "Notification",
-  notificationsSchema
+  notificationsSchema,
 );

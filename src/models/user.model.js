@@ -45,11 +45,11 @@ const userSchema = new Schema(
       },
     ],
     isActive: {
-      type: Boolean, 
-      default: true
-    }
+      type: Boolean,
+      default: true,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // hash the password before saving it to db and hash it only if it is modified

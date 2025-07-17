@@ -25,9 +25,13 @@ const forgotPasswordController = async (req, res) => {
 
     const resetLink = `${process.env.BASE_URL}/resetPassword?token=${resetToken}`;
 
-    successResponse(res, 'Mail sent successfully to your registered email.', resetLink)
+    successResponse(
+      res,
+      "Mail sent successfully to your registered email.",
+      resetLink,
+    );
   } catch (error) {
-    return errorResponse(res, 'Error sending email to the registered email id')
+    return errorResponse(res, "Error sending email to the registered email id");
   }
 };
 

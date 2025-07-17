@@ -23,7 +23,7 @@ const deleteReview = async (req, res) => {
 
     // filtering the reviews array
     findProduct.reviews = findProduct.reviews.filter(
-      (revId) => revId.toString() !== reviewId
+      (revId) => revId.toString() !== reviewId,
     );
 
     // saving the changes

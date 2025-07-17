@@ -16,12 +16,11 @@ const deleteProduct = async (req, res) => {
     if (!_id) return errorResponse(res, "Product id is required", 400);
 
     // find the product with this id
-    const existingProduct = await Product.findById({_id});
+    const existingProduct = await Product.findById({ _id });
 
     //check if the product exists
-    if(!existingProduct)
-        return errorResponse(res, "Product not found", 400);
-    
+    if (!existingProduct) return errorResponse(res, "Product not found", 400);
+
     // is yes then mark it as deleted
     existingProduct.isDeleted = true;
 

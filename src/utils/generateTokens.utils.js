@@ -15,5 +15,5 @@ export const generateRefreshToken = (data) => {
 export const geenrateResetToken = (data) => {
   return jwt.sign(data, process.env.RESET_TOKEN_SECRET, {
     expiresIn: process.env.RESET_TOKEN_EXPIRY,
-  })
-}
+  });
+};

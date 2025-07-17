@@ -77,13 +77,13 @@ const productSchema = mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 productSchema.pre("save", function (next) {
   if (this.productDiscountedPrice > this.productPrice) {
     const error = new Error(
-      "Discounted price cannot be greater than the original price."
+      "Discounted price cannot be greater than the original price.",
     );
     return next(error);
   }

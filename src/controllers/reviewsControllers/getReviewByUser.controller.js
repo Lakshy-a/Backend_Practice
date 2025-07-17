@@ -18,7 +18,7 @@ const getReviewsByUser = async (req, res) => {
     successResponse(
       res,
       "Fetched reviews by user successfully",
-      reviewsOfThisUser
+      reviewsOfThisUser,
     );
   } catch (error) {
     console.log(error);

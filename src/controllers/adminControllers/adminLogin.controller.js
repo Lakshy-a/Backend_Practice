@@ -20,7 +20,7 @@ const adminLogin = async (req, res) => {
 
     const isPasswordCorrect = await bcrypt.compare(
       adminPassword,
-      isExist.adminPassword
+      isExist.adminPassword,
     );
     if (!isPasswordCorrect) return errorResponse(res, 400, "Invalid password");
 
