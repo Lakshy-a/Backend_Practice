@@ -5,7 +5,6 @@ import { uploadOnCloudinary } from "../../utils/cloudinary.service.js";
 
 const registerController = async (req, res) => {
   const { name, email, password, phone } = req.body;
-  // console.log(req.body);
 
   try {
     // All fields are required
