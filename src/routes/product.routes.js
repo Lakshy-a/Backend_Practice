@@ -13,11 +13,7 @@ import restoreProduct from "../controllers/productControllers/restoreProduct.con
 router.get("/allProduct", getAllProducts);
 router.get("/productsById/:_id", getProductsById);
 router.get("/productsByCategory/:category", getProductsByCategory);
-router.post(
-  "/addProduct",
-  upload.array("productImages"),
-  postNewProduct
-);
+router.post("/addProduct", upload.array("productImages"), postNewProduct);
 router.delete("/deleteProduct/:_id", isLoggedIn, deleteProduct);
 router.post("/restoreProduct/:_id", isLoggedIn, restoreProduct);
 

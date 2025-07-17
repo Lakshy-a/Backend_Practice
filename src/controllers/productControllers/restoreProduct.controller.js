@@ -6,14 +6,12 @@ import { Product } from "../../models/product.model.js";
 
 const restoreProduct = async (req, res) => {
   const { _id } = req.params;
-//   console.log(_id)
+  //   console.log(_id)
   try {
-    if(!_id)
-        return errorResponse(res, 401, "Id is required");
+    if (!_id) return errorResponse(res, 401, "Id is required");
 
-    const product = await Product.findById({_id});
-    if(!product)
-        return errorResponse(res, 404, "Product not found");
+    const product = await Product.findById({ _id });
+    if (!product) return errorResponse(res, 404, "Product not found");
 
     product.isDeleted = false;
     await product.save();

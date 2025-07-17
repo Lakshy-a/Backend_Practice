@@ -5,8 +5,8 @@ import jwt from "jsonwebtoken";
 const isLoggedIn = async (req, res, next) => {
   // Access the token from cookies
   // const token = req.cookies.accessToken;
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer <token>
 
   // Check if the token is present
   if (!token) {
@@ -33,7 +33,7 @@ const isLoggedIn = async (req, res, next) => {
       return errorResponse(
         res,
         401,
-        "Your session has expired, please login again"
+        "Your session has expired, please login again",
       );
     } else if (error.name === "JsonWebTokenError") {
       return errorResponse(res, 401, "Invalid token");

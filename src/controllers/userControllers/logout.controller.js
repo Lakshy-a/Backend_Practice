@@ -11,7 +11,7 @@ const logoutController = async (req, res) => {
 
     await User.updateOne(
       { email: userEmail },
-      { $unset: { refreshToken: "" } }  // or use $set: { refreshToken: null }
+      { $unset: { refreshToken: "" } }, // or use $set: { refreshToken: null }
     );
     successResponse(res, 200, "User logged out successfully...");
   } catch (error) {

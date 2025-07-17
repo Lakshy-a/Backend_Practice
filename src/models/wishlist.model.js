@@ -17,7 +17,7 @@ const wishlistSchema = mongoose.Schema(
       default: 1,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const Wishlist = mongoose.model("Wishlist", wishlistSchema);

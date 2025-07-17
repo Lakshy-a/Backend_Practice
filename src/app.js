@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import reviewsRoutes from "./routes/reviews.routes.js";
 import ordersRoutes from "./routes/orders.routes.js";
 import adminRoutes from "./routes/adminAuth.routes.js";
-import notificationRoutes from "./routes/notifications.routes.js"
+import notificationRoutes from "./routes/notifications.routes.js";
 import dotenv from "dotenv";
 import connectionToDb from "./db/database.js";
 
@@ -21,7 +21,7 @@ connectionToDb()
     }),
     app.on("error", (error) => {
       console.error("Error: ", error);
-    })
+    }),
   )
   .catch((error) => {
     console.log(`DB connection failed:`, error);
@@ -31,16 +31,20 @@ app.use(
   cors({
     origin: "http://localhost:5173", // Your frontend URL
     credentials: true, // Allow credentials (cookies)
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Forever Backend API");
+});
 
 app.use("/api/auth", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewsRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api", userRoutes)
-app.use("/api/notifications", notificationRoutes)
+app.use("/api", userRoutes);
+app.use("/api/notifications", notificationRoutes);

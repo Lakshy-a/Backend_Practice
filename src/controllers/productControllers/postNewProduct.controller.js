@@ -61,7 +61,7 @@ const postNewProduct = async (req, res) => {
 
     // uplaod the files from localpath to cloudinary, cloudinary will return a promise with some information for every file uploaded to it, save it to cloudinaryPath
     const cloudinaryPath = await Promise.all(
-      localPath.map((local) => uploadOnCloudinary(local))
+      localPath.map((local) => uploadOnCloudinary(local)),
     );
 
     // check if files are uploaded to cloudinary or not

@@ -33,7 +33,7 @@ const loginController = async (req, res) => {
     // check the password
     const isValidPassword = await bcrypt.compare(
       password,
-      existingUser.password
+      existingUser.password,
     );
     if (!isValidPassword) return handleError(res, 400, "Incorrect password...");
     // console.log(isValidPassword)
@@ -58,7 +58,6 @@ const loginController = async (req, res) => {
       httpOnly: false, // prevents client-side JavaScript from accessing the cookie.
       secure: true, // ensures that the cookie is only sent over HTTPS connections.
       sameSite: "none",
-      secure: true,
     };
 
     // set access token as cookies

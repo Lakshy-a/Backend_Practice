@@ -4,7 +4,7 @@ import getUsersCart from "../controllers/cartControllers/getUsersCart.controller
 import updateCartItemQuantity from "../controllers/cartControllers/updateCartItemQuantity.controller.js";
 import clearCart from "../controllers/cartControllers/clearCart.controller.js";
 import removeProductFromCart from "../controllers/cartControllers/removeProductFromCart.controller.js";
-import isLoggedIn from "../middlewares/isLoggedIn.middleware.js"
+import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
 
 const router = express.Router();
 

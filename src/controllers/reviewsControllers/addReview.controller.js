@@ -10,7 +10,7 @@ import { User } from "../../models/user.model.js";
 const addReview = async (req, res) => {
   const { rating, review, productId } = req.body;
   try {
-    if(!rating || !review || !productId){
+    if (!rating || !review || !productId) {
       return errorResponse(res, 400, "Please fill all the fields");
     }
     // const isEmpty = [rating, review, productId].some((item) => !item);
@@ -40,14 +40,14 @@ const addReview = async (req, res) => {
     await Product.findByIdAndUpdate(
       productId,
       { $push: { reviews: savedReview._id }, averageRating: averageRating },
-      { new: true } // Return the updated product
+      { new: true }, // Return the updated product
     );
 
     // push the review id into the reviewsPosted array os user
     await User.findByIdAndUpdate(
       userId,
       { $push: { reviewsPosted: savedReview._id } },
-      { new: true }
+      { new: true },
     );
 
     return successResponse(res, "Review added successfully...");
