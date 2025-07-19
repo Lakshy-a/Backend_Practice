@@ -48,6 +48,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    role: {
+      type: String,
+      default: 'customer'
+    }
   },
   { timestamps: true },
 );

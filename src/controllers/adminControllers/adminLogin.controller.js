@@ -24,7 +24,14 @@ const adminLogin = async (req, res) => {
     );
     if (!isPasswordCorrect) return errorResponse(res, 400, "Invalid password");
 
-    const accessToken = generateAccessToken(req.body);
+    const accessTokenData = {
+      _id: isExist._id,
+      email: isExist.email,
+      name: isExist.fullName,
+      role: isExist.role,
+    };
+
+    const accessToken = generateAccessToken(accessTokenData);
     const refreshToken = generateRefreshToken({
       adminEmail,
     });

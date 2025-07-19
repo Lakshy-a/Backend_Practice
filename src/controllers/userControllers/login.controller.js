@@ -43,6 +43,7 @@ const loginController = async (req, res) => {
       _id: existingUser._id,
       email: existingUser.email,
       name: existingUser.fullName,
+      role: existingUser.role,
     };
     const accessToken = generateAccessToken(accessTokenData);
 

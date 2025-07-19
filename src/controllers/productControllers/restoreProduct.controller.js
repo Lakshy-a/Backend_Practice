@@ -16,7 +16,7 @@ const restoreProduct = async (req, res) => {
     product.isDeleted = false;
     await product.save();
 
-    successResponse(res, "Product Restored Successfully");
+    successResponse(res, 200, "Product Restored Successfully");
   } catch (error) {
     console.log(error);
     return errorResponse(res, 500, "Error restoring product");
