@@ -6,7 +6,6 @@ import { Product } from "../../models/product.model.js";
 
 const restoreProduct = async (req, res) => {
   const { _id } = req.params;
-  //   console.log(_id)
   try {
     if (!_id) return errorResponse(res, 401, "Id is required");
 

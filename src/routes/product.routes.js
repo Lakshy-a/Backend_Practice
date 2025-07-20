@@ -14,7 +14,7 @@ import { whatRole } from "../middlewares/whatRole.middleware.js";
 router.get("/allProduct", getAllProducts);
 router.get("/productsById/:_id", getProductsById);
 router.get("/productsByCategory/:category", getProductsByCategory);
-router.post("/addProduct", isLoggedIn, whatRole("admin"), upload.array("productImages"), postNewProduct);
+router.post("/addProduct", isLoggedIn, upload.array("productImages"), postNewProduct);
 router.delete(`/deleteProduct/:_id`, isLoggedIn, whatRole("admin"), deleteProduct);
 router.post("/restoreProduct/:_id", isLoggedIn, whatRole("admin"), restoreProduct);
 

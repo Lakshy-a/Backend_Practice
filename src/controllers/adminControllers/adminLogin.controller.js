@@ -26,8 +26,8 @@ const adminLogin = async (req, res) => {
 
     const accessTokenData = {
       _id: isExist._id,
-      email: isExist.email,
-      name: isExist.fullName,
+      email: isExist.adminEmail,
+      name: isExist.adminName,
       role: isExist.role,
     };
 
@@ -46,7 +46,7 @@ const adminLogin = async (req, res) => {
     isExist.refreshToken = refreshToken;
     await isExist.save();
 
-    successResponse(res, "Admin Login Successful");
+    successResponse(res, "Admin Login Successful", accessToken);
   } catch (error) {
     console.log(error);
     return errorResponse(res, 500, "Error login admin...");
