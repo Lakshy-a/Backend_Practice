@@ -12,8 +12,6 @@ const getUsersCart = async (req, res) => {
       return errorResponse(res, 404, "Cart not found");
     }
 
-    console.log(fetchedCart);
-
     successResponse(res, "Cart fetched successfully", fetchedCart);
   } catch (error) {
     console.error(error); // Log the error for debugging
