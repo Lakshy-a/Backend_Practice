@@ -7,6 +7,7 @@ import reviewsRoutes from "./routes/reviews.routes.js";
 import ordersRoutes from "./routes/orders.routes.js";
 import adminRoutes from "./routes/adminAuth.routes.js";
 import notificationRoutes from "./routes/notifications.routes.js";
+import cartRoutes from './routes/cart.routes.js'
 import dotenv from "dotenv";
 import connectionToDb from "./db/database.js";
 
@@ -46,5 +47,5 @@ app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewsRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api", userRoutes);
+app.use("/api/cart", cartRoutes);
 app.use("/api/notifications", notificationRoutes);

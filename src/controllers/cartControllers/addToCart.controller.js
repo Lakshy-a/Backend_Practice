@@ -17,10 +17,16 @@ const addToCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId: req.user._id,
-        products: [productData.productId],
+        products: [{
+          productId: productData.productId,
+          quantity: quantity || 1,
+        }],
       });
     } else {
-      cart.products.push(productData.productId);
+      cart.products.push({
+        productId: productData.productId,
+        quantity: quantity || 1,
+      });
     }
 
     const savedCart = await cart.save();
@@ -31,7 +37,7 @@ const addToCart = async (req, res) => {
 
     successResponse(res, "Product added to cart successfully");
   } catch (error) {
-    console.error(error); 
+    console.error(error);
     return errorResponse(res, 500, "Error adding product to cart");
   }
 };
