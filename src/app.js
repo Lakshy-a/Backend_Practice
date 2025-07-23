@@ -28,12 +28,24 @@ connectionToDb()
     console.log(`DB connection failed:`, error);
   });
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://forever-frontend-d75a.onrender.com",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend URL
-    credentials: true, // Allow credentials (cookies)
-  }),
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
