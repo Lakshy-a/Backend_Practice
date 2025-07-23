@@ -7,29 +7,36 @@ import {
 
 const addToCart = async (req, res) => {
   const { productData, quantity } = req.body;
-  console.log(req.user._id);
-  console.log(productData);
-  console.log(quantity);
 
   try {
     if (!productData)
       return errorResponse(res, 400, "Product data is required");
 
-    // Find the cart for the logged-in user
     let cart = await Cart.findOne({ userId: req.user._id });
 
-    // If no cart exists, create a new cart
     if (!cart) {
       cart = new Cart({
         userId: req.user._id,
-        products: [productData.productId],
+        products: [{
+          productId: productData.productId,
+          quantity: quantity || 1,
+          productSize: productData.productSize,
+          productPrice: productData.productPrice,
+          productImage: productData.productImage,
+          productTitle: productData.productTitle
+        }],
       });
     } else {
-      // If cart exists, add the new product to the existing cart's products
-      cart.products.push(productData.productId);
+      cart.products.push({
+        productId: productData.productId,
+        quantity: quantity || 1,
+        productSize: productData.productSize,
+        productPrice: productData.productPrice,
+        productImage: productData.productImage,
+        productTitle: productData.productTitle
+      });
     }
 
-    // Save the cart (either newly created or updated)
     const savedCart = await cart.save();
 
     const fetchedUser = await User.findById(req.user._id);
@@ -38,7 +45,7 @@ const addToCart = async (req, res) => {
 
     successResponse(res, "Product added to cart successfully");
   } catch (error) {
-    console.error(error); // Log the error for debugging
+    console.error(error);
     return errorResponse(res, 500, "Error adding product to cart");
   }
 };

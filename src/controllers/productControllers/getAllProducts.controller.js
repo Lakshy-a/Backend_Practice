@@ -7,7 +7,7 @@ import { Product } from "../../models/product.model.js";
 const getAllProducts = async (req, res) => {
   try {
     // find all the products
-    const allProducts = await Product.find();
+    const allProducts = await Product.find().lean();
 
     successResponse(res, "Successfully fetched all products", allProducts);
   } catch (error) {

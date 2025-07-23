@@ -6,7 +6,6 @@ import { Product } from "../../models/product.model.js";
 
 const restoreProduct = async (req, res) => {
   const { _id } = req.params;
-  //   console.log(_id)
   try {
     if (!_id) return errorResponse(res, 401, "Id is required");
 
@@ -16,7 +15,7 @@ const restoreProduct = async (req, res) => {
     product.isDeleted = false;
     await product.save();
 
-    successResponse(res, "Product Restored Successfully");
+    successResponse(res, 200, "Product Restored Successfully");
   } catch (error) {
     console.log(error);
     return errorResponse(res, 500, "Error restoring product");

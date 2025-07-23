@@ -43,7 +43,6 @@ const productSchema = mongoose.Schema(
     availableSizes: {
       type: Array,
       default: [],
-
       required: true,
     },
     availableColors: {

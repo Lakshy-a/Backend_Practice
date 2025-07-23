@@ -24,7 +24,14 @@ const adminLogin = async (req, res) => {
     );
     if (!isPasswordCorrect) return errorResponse(res, 400, "Invalid password");
 
-    const accessToken = generateAccessToken(req.body);
+    const accessTokenData = {
+      _id: isExist._id,
+      email: isExist.adminEmail,
+      name: isExist.adminName,
+      role: isExist.role,
+    };
+
+    const accessToken = generateAccessToken(accessTokenData);
     const refreshToken = generateRefreshToken({
       adminEmail,
     });
@@ -39,7 +46,7 @@ const adminLogin = async (req, res) => {
     isExist.refreshToken = refreshToken;
     await isExist.save();
 
-    successResponse(res, "Admin Login Successful");
+    successResponse(res, "Admin Login Successful", accessToken);
   } catch (error) {
     console.log(error);
     return errorResponse(res, 500, "Error login admin...");
