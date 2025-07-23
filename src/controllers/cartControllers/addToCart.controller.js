@@ -20,12 +20,20 @@ const addToCart = async (req, res) => {
         products: [{
           productId: productData.productId,
           quantity: quantity || 1,
+          productSize: productData.productSize,
+          productPrice: productData.productPrice,
+          productImage: productData.productImage,
+          productTitle: productData.productTitle
         }],
       });
     } else {
       cart.products.push({
         productId: productData.productId,
         quantity: quantity || 1,
+        productSize: productData.productSize,
+        productPrice: productData.productPrice,
+        productImage: productData.productImage,
+        productTitle: productData.productTitle
       });
     }
 

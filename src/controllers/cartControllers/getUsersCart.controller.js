@@ -5,11 +5,16 @@ import {
 } from "../../utils/apiResponse.utils.js";
 
 const getUsersCart = async (req, res) => {
-  const userId = req.user._id; // Assumes req.user contains authenticated user details
+  const userId = req.user._id;
   try {
-    const fetchedCart = await Cart.findOne({ userId }).populate("products");
+    const fetchedCart = await Cart.findOne({ userId });
+    
     if (!fetchedCart) {
-      return errorResponse(res, 404, "Cart not found");
+      fetchedCart = {
+        userId,
+        cartItems: [],
+        cartCount: 0,
+      };
     }
 
     successResponse(res, "Cart fetched successfully", fetchedCart);
