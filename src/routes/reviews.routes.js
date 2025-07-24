@@ -11,11 +11,11 @@ import filterReviews from "../controllers/reviewsControllers/filterReviews.contr
 
 const router = express.Router();
 
-router.get("/getReviewsByProduct/:productId", isLoggedIn, getReviewsByProduct);
+router.get("/getReviewsByProduct/:productId", getReviewsByProduct);
 router.get("/getReviewById/:reviewId", getReviewById);
 router.get("/getUserReview/:userId", getReviewsByUser);
 router.get("/getAlReviews", getAllReviews);
-router.post("/addReview", addReview);
+router.post("/addReview", isLoggedIn, addReview);
 router.put("/updateReview/:reviewId", updateReview);
 router.delete("/deleteReview/:reviewId", deleteReview);
 
